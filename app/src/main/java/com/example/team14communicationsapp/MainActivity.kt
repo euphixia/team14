@@ -4,14 +4,24 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.team14communicationsapp.ui.screens.Screen
 import com.example.team14communicationsapp.ui.theme.Team14CommunicationsAppTheme
+import com.example.team14communicationsapp.viewmodel.tabs
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,11 +29,37 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Team14CommunicationsAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                val navController = rememberNavController()
+                Scaffold(modifier = Modifier.fillMaxSize(), bottomBar = {
+                    //TODO we will create our bottom navigation bar here
+                    NavigationBar {
+                        tabs.map{ item ->
+                            NavigationBarItem(
+                                selected = false,
+                                onClick = { navController.navigate(item.screen)},
+                                icon = { Icon(imageVector = item.icon, contentDescription = null) },
+                                label = {Text(text=item.label)}
+                            )
+                        }
+                    }
+                }) { innerPadding ->
+                    Box(modifier = Modifier.padding(innerPadding)){
+
+                        NavHost(
+                            navController = navController,
+                            startDestination = Screen.HomeScreen
+                        ) {
+                            composable<Screen.HomeScreen> {
+                                Text( text= "HOME: add your screen here")
+                            }
+                            composable<Screen.TagEditingScreen> {
+                                Text( text="TAGEDITTING : add your screen here")
+                            }
+                            composable<Screen.SimilarUsersScreen> {
+                                Text(text= "SIMILARUSESCREEN : add your screen here")
+                            }
+                        }
+                    }
                 }
             }
         }
