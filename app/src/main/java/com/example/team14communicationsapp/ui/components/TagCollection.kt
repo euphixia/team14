@@ -61,7 +61,7 @@ fun TagCollection(
             ) {
                 Row(modifier = Modifier.fillMaxWidth()) {
                     LazyHorizontalGrid(
-                        rows = GridCells.Adaptive(50.dp),
+                        rows = GridCells.Adaptive(40.dp),
                         verticalArrangement = Arrangement.Top,
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
@@ -85,6 +85,6 @@ private fun TagCollectionPreview() {
     TagCollection(
         color = Color.Red,
         tagCategory = "Clubs",
-        tagContent = listOf("Taekwondo", "App Dev", "CU Figure Skating", "URMC")
+        tagContent = listOf("Taekwondo", "App Dev", "CU Figure Skating", "URMC", "Paleontology Club")
     )
 }
