@@ -15,6 +15,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,14 +30,15 @@ fun TagCollection(
     tagCategory: String,
     tagContent: List<String>
 ) {
+    val safeTags = tagContent.orEmpty()
     Surface(
         shape = RoundedCornerShape(12.dp),
         shadowElevation = 4.dp,
         modifier = Modifier
             .fillMaxWidth()
-            .height(220.dp)
+            .height(150.dp)
     ) {
-        Column {
+        Column(modifier = Modifier.minimumInteractiveComponentSize()) {
             Box(
                 modifier = Modifier
                     .weight(.3f)
@@ -56,7 +58,7 @@ fun TagCollection(
             }
             Box(
                 modifier = Modifier
-                    .weight(1f)
+                    .weight(.5f)
                     .fillMaxWidth()
             ) {
                 Row(modifier = Modifier.fillMaxWidth()) {
@@ -65,6 +67,7 @@ fun TagCollection(
                         verticalArrangement = Arrangement.Top,
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
+
                         items(tagContent) { content ->
                             Text(
                                 text = content,
