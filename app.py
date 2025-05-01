@@ -73,6 +73,7 @@ def add_tag_to_user(user_id):
 
 # Add Category
 # ----------------------------
+# Not be used for frontend
 # Body (JSON): { "name": "Course" }
 # Description: Creates a new category.
 @app.route("/categories/", methods=["POST"])
@@ -88,6 +89,7 @@ def add_category():
 
 # Delete Category
 # ----------------------------
+# Not be used for frontend
 # Description: Deletes a category and all its associated tags.
 @app.route("/categories/<int:category_id>/", methods=["DELETE"])
 def delete_category(category_id):
