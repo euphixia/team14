@@ -55,19 +55,22 @@ def add_tag_to_user(user_id):
     if not category:
         return failure_response("Category not found", 404)
 
-    # check if tag exist
+    # Check if tag already exists (same name and category)
     tag = Tag.query.filter_by(name=tag_name, category_id=category_id).first()
 
-    # creates tag if it doesn't exist
+    # If tag doesn't exist, create it
     if not tag:
         tag = Tag(name=tag_name, category_id=category_id)
         db.session.add(tag)
         db.session.commit()
 
-    # add tag to the user
-    if tag not in user.tags:
-        user.tags.append(tag)
-        db.session.commit()
+    # Check if the user already has this tag
+    if tag in user.tags:
+        return failure_response("User already has this tag", 400)
+
+    # Add tag to the user
+    user.tags.append(tag)
+    db.session.commit()
 
     return success_response(user.serialize())
 
