@@ -49,8 +49,10 @@ class HomeViewModel @Inject constructor(
         )
     }
 
-//    fun changeProfilePic(currentUser : User, newPic : ImageVector){
-//        currentUser = currentUser.copy(profilePic = newPic)
-//    }
+    fun changeProfilePic(newPic : ImageVector){
+       _uiState.value = _uiState.value.copy(
+           user = _uiState.value.user.copy(profilePic = newPic)
+       )
+    }
 
 }
