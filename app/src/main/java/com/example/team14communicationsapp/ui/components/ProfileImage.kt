@@ -26,9 +26,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun ProfileImage() {
+fun ProfileImage( onClick : () -> Unit) {
     Surface(
-        onClick = { -> null },
+        onClick = onClick,
         modifier = Modifier
             .width(20.dp)
             .height(20.dp)
@@ -42,11 +42,10 @@ fun ProfileImage() {
                 .fillMaxHeight().background(color = Color.LightGray)
         ) {
             Text(
-                text = "( + )",
+                text = "+",
                 modifier = Modifier.align(Alignment.Center),
-                fontWeight = FontWeight.Bold,
                 color = Color.Black,
-                fontSize = 4.sp
+                fontSize = 8.sp
             )
         }
     }
@@ -55,5 +54,5 @@ fun ProfileImage() {
 @Preview(showBackground = true)
 @Composable
 private fun ProfileImagePreview() {
-    ProfileImage()
+    ProfileImage(onClick = {-> null})
 }

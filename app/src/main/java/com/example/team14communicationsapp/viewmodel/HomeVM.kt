@@ -1,7 +1,10 @@
 package com.example.team14communicationsapp.viewmodel
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Star
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.ViewModel
 import com.example.team14communicationsapp.R
 import com.example.team14communicationsapp.model.TagRepository
@@ -17,7 +20,7 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
     data class HomeUIState(
         val tagMap: Map<String, List<String>> = emptyMap<String, List<String>>(),
-        val user: UserRepository.User = User("name","major",R.drawable.ic_launcher_foreground)
+        val user: UserRepository.User = User("name","major", Icons.Outlined.Star)
     ){
         val tagCategory: List<String>
             get() = tagMap.keys.toList()
@@ -27,7 +30,7 @@ class HomeViewModel @Inject constructor(
             get() = user.name
         val userMajor : String
             get() = user.major
-        val userProfilePic : Int
+        val userProfilePic : ImageVector
             get() = user.profilePic
 
     }
@@ -45,5 +48,9 @@ class HomeViewModel @Inject constructor(
             tagMap = tagRepo.getAllCategories()
         )
     }
+
+//    fun changeProfilePic(currentUser : User, newPic : ImageVector){
+//        currentUser = currentUser.copy(profilePic = newPic)
+//    }
 
 }

@@ -1,6 +1,10 @@
 package com.example.team14communicationsapp.model
 
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.outlined.Star
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.example.team14communicationsapp.R
@@ -10,11 +14,12 @@ class UserRepository @Inject constructor(){
     data class User(
         val name : String,
         val major : String,
-        val profilePic : Int,
+        val profilePic : ImageVector,
     )
 
-    val emptyUser = User("name","major",R.drawable.ic_launcher_foreground)
+    val emptyUser = User("name","major", Icons.Filled.Person)
     fun getAllUsers(): List<User> = listOf(
-        User("cat", "nap", R.drawable.ic_launcher_foreground)
+        User("cat", "nap", Icons.Outlined.Star)
     )
+
 }
