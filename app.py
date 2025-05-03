@@ -55,30 +55,26 @@ def add_tag_to_user(user_id):
     if not category:
         return failure_response("Category not found", 404)
 
-    # Check if tag already exists (same name and category)
+    # check if tag exist
     tag = Tag.query.filter_by(name=tag_name, category_id=category_id).first()
 
-    # If tag doesn't exist, create it
+    # creates tag if it doesn't exist
     if not tag:
         tag = Tag(name=tag_name, category_id=category_id)
         db.session.add(tag)
         db.session.commit()
 
-    # Check if the user already has this tag
-    if tag in user.tags:
-        return failure_response("User already has this tag", 400)
-
-    # Add tag to the user
-    user.tags.append(tag)
-    db.session.commit()
+    # add tag to the user
+    if tag not in user.tags:
+        user.tags.append(tag)
+        db.session.commit()
 
     return success_response(user.serialize())
 
 # Add Category
 # ----------------------------
-# Not be used for frontend
 # Body (JSON): { "name": "Course" }
-# Description: Creates a new category.
+# Description: Creates a new category.  
 @app.route("/categories/", methods=["POST"])
 def add_category():
     body = json.loads(request.data)
@@ -92,7 +88,6 @@ def add_category():
 
 # Delete Category
 # ----------------------------
-# Not be used for frontend
 # Description: Deletes a category and all its associated tags.
 @app.route("/categories/<int:category_id>/", methods=["DELETE"])
 def delete_category(category_id):
@@ -157,6 +152,25 @@ def get_user_by_id(user_id):
     if not user:
         return failure_response("User not found", 404)
     return success_response(user.serialize())
+
+# Creating preset categories
+category = Category("Courses")
+db.session.add(category)
+category_two = Category("Clubs")
+db.session.add(category_two)
+category_three = Category("Hobbies")
+db.session.add(category_three)
+category_four = Category("Looking for:")
+db.session.add(category_four)
+db.session.commit()
+
+body = json.loads(request.data)
+    if body.get("name") is None:
+        return failure_response("Missing category name", 400)
+    
+    new_category = Category(name=body["name"])
+    db.session.add(new_category)
+    db.session.commit()
 
 if __name__ == "__main__":
     app.run(debug=True)
