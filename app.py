@@ -164,14 +164,6 @@ category_four = Category("Looking for:")
 db.session.add(category_four)
 db.session.commit()
 
-body = json.loads(request.data)
-    if body.get("name") is None:
-        return failure_response("Missing category name", 400)
-    
-    new_category = Category(name=body["name"])
-    db.session.add(new_category)
-    db.session.commit()
-
 if __name__ == "__main__":
     app.run(debug=True)
 
