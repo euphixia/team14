@@ -32,7 +32,7 @@ def add_user():
     new_user = User(name=body["name"])
     db.session.add(new_user)
     db.session.commit()
-    return success_response(new_user.serialize())
+    return success_response(new_user.serialize(), 201)
 
 # Add Tag to User
 # ----------------------------
@@ -69,7 +69,7 @@ def add_tag_to_user(user_id):
         user.tags.append(tag)
         db.session.commit()
 
-    return success_response(user.serialize())
+    return success_response(user.serialize(), 201)
 
 # Add Category
 # ----------------------------
@@ -97,7 +97,7 @@ def delete_category(category_id):
 
     db.session.delete(category)
     db.session.commit()
-    return success_response({"message": f"Category {category_id} deleted."})
+    return success_response({"message": "Category {category_id} deleted."})
 
 # Remove Tag from User
 # ----------------------------
