@@ -19,11 +19,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.team14communicationsapp.ui.screens.HomeScreen
 import com.example.team14communicationsapp.ui.screens.Screen
 import com.example.team14communicationsapp.ui.theme.Team14CommunicationsAppTheme
 import com.example.team14communicationsapp.viewmodel.tabs
 import com.example.team14communicationsapp.ui.screens.Screen.HomeScreen.toScreen
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +56,7 @@ class MainActivity : ComponentActivity() {
                             startDestination = Screen.HomeScreen
                         ) {
                             composable<Screen.HomeScreen> {
-                                Text(text = "HOME: add your screen here")
+                                HomeScreen()
                             }
                             composable<Screen.TagEditingScreen> {
                                 Text(text = "TAGEDITTING : add your screen here")
