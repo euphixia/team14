@@ -1,3 +1,5 @@
+link to database drawing: https://drive.google.com/file/d/1EzXRqHJhv2Pmt8uqxm1pNgdnSirDMYlM/view?usp=drive_link
+
 # Mingle
 
 **Tagline:** _Connecting people through shared interests and experiences._
@@ -41,3 +43,4 @@
 
 - Mingle is optimized for making meaningful connections through shared interests — not just social interaction, but real collaboration potential.
 - Our tag-based system is flexible, encouraging organic community formation without rigid categories.
+
