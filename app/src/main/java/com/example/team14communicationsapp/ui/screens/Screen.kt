@@ -14,6 +14,9 @@ sealed class Screen{
     data object HomeScreen: Screen()
 
     @Serializable
+    data object ProfilePicOptionsScreen: Screen()
+
+    @Serializable
     data object SimilarUsersScreen: Screen()
 
     @Serializable
@@ -21,9 +24,10 @@ sealed class Screen{
 
     fun NavBackStackEntry.toScreen(): Screen? =
         when (destination.route?.substringAfterLast(".")?.substringBefore("/")) {
-            "HomeScreen" -> toRoute<HomeScreen>()
-            "TagEditingScreen" -> toRoute<TagEditingScreen>()
-            "SimilarUsersScreen" -> toRoute<SimilarUsersScreen>()
+            "HomeScreen" -> toRoute<Screen.HomeScreen>()
+            "ProfilePicOptionsScreen" -> toRoute<Screen.ProfilePicOptionsScreen>()
+            "TagEditingScreen" -> toRoute<Screen.TagEditingScreen>()
+            "SimilarUsersScreen" -> toRoute<Screen.SimilarUsersScreen>()
             else -> null
         }
 }

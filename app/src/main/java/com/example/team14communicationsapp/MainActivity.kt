@@ -19,11 +19,16 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.compose.runtime.getValue
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.team14communicationsapp.ui.screens.HomeScreen
+import com.example.team14communicationsapp.ui.screens.ProfilePicOptionsScreen
 import com.example.team14communicationsapp.ui.screens.Screen
 import com.example.team14communicationsapp.ui.theme.Team14CommunicationsAppTheme
 import com.example.team14communicationsapp.viewmodel.tabs
 import com.example.team14communicationsapp.ui.screens.Screen.HomeScreen.toScreen
+import com.example.team14communicationsapp.ui.screens.TagEditingScreen
+import com.example.team14communicationsapp.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,9 +40,9 @@ class MainActivity : ComponentActivity() {
             Team14CommunicationsAppTheme {
 
                 val navController = rememberNavController()
-                val navBackStackEntry = navController.currentBackStackEntryAsState().value
+                val navBackStackEntry by navController.currentBackStackEntryAsState()
+
                 Scaffold(modifier = Modifier.fillMaxSize(), bottomBar = {
-                    //TODO we will create our bottom navigation bar here
                     NavigationBar {
                         tabs.map { item ->
                             NavigationBarItem(
@@ -50,16 +55,26 @@ class MainActivity : ComponentActivity() {
                     }
                 }) { innerPadding ->
                     Box(modifier = Modifier.padding(innerPadding)) {
-
+                        val homeViewModel: HomeViewModel = hiltViewModel()
                         NavHost(
                             navController = navController,
                             startDestination = Screen.HomeScreen
                         ) {
+
                             composable<Screen.HomeScreen> {
-                                HomeScreen()
+                                HomeScreen(
+                                    navController = navController,
+                                    viewModel = homeViewModel
+                                )
+                            }
+                            composable<Screen.ProfilePicOptionsScreen> {
+                                ProfilePicOptionsScreen(
+                                    navController = navController,
+                                    viewModel = homeViewModel
+                                )
                             }
                             composable<Screen.TagEditingScreen> {
-                                Text(text = "TAGEDITTING : add your screen here")
+                                TagEditingScreen(viewModel = homeViewModel)
                             }
                             composable<Screen.SimilarUsersScreen> {
                                 Text(text = "SIMILARUSESCREEN : add your screen here")

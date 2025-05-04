@@ -17,6 +17,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -30,7 +31,8 @@ fun TagCollection(
     tagCategory: String,
     tagContent: List<String>
 ) {
-    val safeTags = tagContent.orEmpty()
+    val displayedTags = remember(tagContent) { tagContent }
+
     Surface(
         shape = RoundedCornerShape(12.dp),
         shadowElevation = 4.dp,
@@ -63,12 +65,11 @@ fun TagCollection(
             ) {
                 Row(modifier = Modifier.fillMaxWidth()) {
                     LazyHorizontalGrid(
-                        rows = GridCells.Adaptive(40.dp),
+                        rows = GridCells.Fixed(1),
                         verticalArrangement = Arrangement.Top,
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
-
-                        items(tagContent) { content ->
+                        items(displayedTags) { content ->
                             Text(
                                 text = content,
                                 fontSize = 20.sp,
@@ -80,14 +81,4 @@ fun TagCollection(
             }
         }
     }
-}
-
-@Preview
-@Composable
-private fun TagCollectionPreview() {
-    TagCollection(
-        color = Color.Red,
-        tagCategory = "Clubs",
-        tagContent = listOf("Taekwondo", "App Dev", "CU Figure Skating", "URMC", "Paleontology Club")
-    )
 }

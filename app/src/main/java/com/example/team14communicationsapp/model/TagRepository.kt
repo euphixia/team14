@@ -3,17 +3,7 @@ package com.example.team14communicationsapp.model
 import javax.inject.Inject
 
 class TagRepository @Inject constructor() {
-    // TODO get functions that actually work with the database
-    // TODO functionality to add new options to each category (so sending new info to the database)
-//    val categories: List<String> = listOf(
-//        "Clubs",
-//        "Reason for Wanting to Connect",
-//        "Hobbies/Interests",
-//        "Current Classes",
-//        "Pre-Professional Track",
-//        "Nationality",
-//        "Language"
-//    )
+
     fun getAllCategories(): Map<String, List<String>> =
         mapOf(
             "Clubs" to listOf(

@@ -1,22 +1,20 @@
 package com.example.team14communicationsapp.model
 
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.Icon
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.Face
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Star
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.example.team14communicationsapp.R
 import javax.inject.Inject
 
 class UserRepository @Inject constructor(){
     data class User(
-        val name : String,
-        val major : String,
-        val profilePic : ImageVector,
+        val name: String = "name",
+        val major: String = "major",
+        val profilePic: ImageVector? = null,
     )
 
     data class PicOptions(
@@ -27,9 +25,9 @@ class UserRepository @Inject constructor(){
 
 
 
-    val emptyUser = User("name","major", Icons.Filled.Person)
+    public val emptyUser = User("name","major", null)
     fun getAllUsers(): List<User> = listOf(
-        User("cat", "nap", Icons.Outlined.Star)
+        User("cat", "nap", Icons.Filled.Star)
     )
 
 }
